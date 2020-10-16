@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "userName": "JonnyBoi",
+      "email": "JonnyBoiRL@epicgames.com",
+      "password": "notsecure"
+    }
+  ],
+  "entries": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Testing In React",
+      "entryText": "This would be a lot easier to type out if it wasn't in a .json file to start with, someone should create something to make this easier. Like some sort of app.",
+      "date": "12-6-1774"
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "React js"
+    }
+  ],
+  "entryTags": [
+    {
+      "id": 1,
+      "entryId": 1,
+      "tagId": 1
+    }
+  ]
+}
