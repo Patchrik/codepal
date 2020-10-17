@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {},
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -53,6 +52,7 @@ export function SignIn() {
         <Avatar
           src={require('/home/parker/workspace/codepal/src/img/codePal.png')}
           className={classes.large}
+          variant="rounded"
         />
         <Typography component="h1" variant="h5">
           Sign in
@@ -93,8 +93,7 @@ export function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs></Grid>
+          <Grid container justify="center">
             <Grid item>
               <Link href="#" variant="body2">
                 {"Don't have an account? Sign Up"}
