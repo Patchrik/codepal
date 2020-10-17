@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
+import { Refresh } from '@material-ui/icons';
 
 function Copyright() {
   return (
@@ -42,18 +44,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// This will be where most of our add JS will live, such as our Auth method and grabing the data to push to the
+const addTest = (testObj) => {
+  return fetch('http://localhost:8088/tests', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(testObj),
+  }).then(console.log('Hopefully this did something?'));
+};
+
+// This will be where most of our edited JS will live, such as our Auth method and grabing the data to push to the
 // the user api
-export function SignIn() {
+export const SignIn = () => {
+  const history = useHistory();
+
   const classes = useStyles();
 
-  const username = useRef();
-  const password = useRef();
-  const existDialog = useRef();
+  const enteredUsername = useRef('');
+  const enteredPassword = useRef('');
+  const existDialog = useRef('');
 
   const existingUserCheck = () => {
     return fetch(
-      `http://localhost:8088/users?userName=${username.current.value}`
+      `http://localhost:8088/users?userName=${enteredUsername.current.value}`
     )
       .then((res) => res.json())
       .then((user) => (user.length ? user[0] : false));
@@ -64,18 +78,16 @@ export function SignIn() {
 
     existingUserCheck().then((exists) => {
       if (exists) {
-        if (exists.password === password.current.value) {
+        if (exists.password === enteredPassword.current.value) {
           localStorage.setItem('activeUser', exists.id);
           history.push('/');
         } else {
           alert(
-            `Sorry that's not the password for ${exists.username}! Make sure that your Caps Lock is off and try again.`
+            `Sorry that's not the password for ${exists.userName}! Make sure that your Caps Lock is off and try again.`
           );
         }
       } else {
-        alert(
-          `Sorry but ${exists.username} doesn't exist. Do you have an account?`
-        );
+        alert(`Sorry but that user doesn't exist. Do you have an account?`);
       }
     });
   };
@@ -92,7 +104,7 @@ export function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -101,6 +113,7 @@ export function SignIn() {
             id="username"
             label="Username"
             name="username"
+            inputRef={enteredUsername}
             autoComplete="username"
             autoFocus
           />
@@ -110,6 +123,7 @@ export function SignIn() {
             required
             fullWidth
             name="password"
+            inputRef={enteredPassword}
             label="Password"
             type="password"
             id="password"
@@ -142,4 +156,4 @@ export function SignIn() {
       </Box>
     </Container>
   );
-}
+};
