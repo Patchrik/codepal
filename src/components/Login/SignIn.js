@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -42,8 +42,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// This will be where most of our add JS will live, such as our Auth method and grabing the data to push to the
+// the user api
 export function SignIn() {
   const classes = useStyles();
+
+  const username = useRef();
+  const password = useRef();
+  const existDialog = useRef();
+
+  const existingUserCheck = () => {
+    return fetch(
+      `http://localhost:8088/users?userName=${username.current.value}`
+    )
+      .then((res) => res.json())
+      .then((user) => (user.length ? user[0] : false));
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    existingUserCheck().then((exists) => {
+      if (exists) {
+        if (exists.password === password.current.value) {
+          localStorage.setItem('activeUser', exists.id);
+          history.push('/');
+        } else {
+          alert(
+            `Sorry that's not the password for ${exists.username}! Make sure that your Caps Lock is off and try again.`
+          );
+        }
+      } else {
+        alert(
+          `Sorry but ${exists.username} doesn't exist. Do you have an account?`
+        );
+      }
+    });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -63,10 +98,10 @@ export function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
             autoFocus
           />
           <TextField
