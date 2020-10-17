@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        CodePal
+        Codepal
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -144,7 +144,7 @@ export const SignIn = () => {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="http://localhost:3000/createAccount" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
