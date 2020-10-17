@@ -2,11 +2,11 @@
   "users": [
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Doe",
-      "userName": "JonnyBoi",
-      "email": "JonnyBoiRL@epicgames.com",
-      "password": "notsecure"
+      "firstName": "test",
+      "lastName": "boi",
+      "userName": "test",
+      "email": "test@aol.com",
+      "password": "pass123"
     }
   ],
   "entries": [
@@ -29,6 +29,18 @@
       "id": 1,
       "entryId": 1,
       "tagId": 1
+    }
+  ],
+  "tests": [
+    {
+      "name": "test",
+      "password": "test",
+      "id": 1
+    },
+    {
+      "name": "parker",
+      "password": "parker",
+      "id": 2
     }
   ]
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
+import { Refresh } from '@material-ui/icons';
 
 function Copyright() {
   return (
@@ -33,10 +35,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -46,29 +44,77 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function SignIn() {
+const addTest = (testObj) => {
+  return fetch('http://localhost:8088/tests', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(testObj),
+  }).then(console.log('Hopefully this did something?'));
+};
+
+// This will be where most of our edited JS will live, such as our Auth method and grabing the data to push to the
+// the user api
+export const SignIn = () => {
+  const history = useHistory();
+
   const classes = useStyles();
+
+  const enteredUsername = useRef('');
+  const enteredPassword = useRef('');
+  const existDialog = useRef('');
+
+  const existingUserCheck = () => {
+    return fetch(
+      `http://localhost:8088/users?userName=${enteredUsername.current.value}`
+    )
+      .then((res) => res.json())
+      .then((user) => (user.length ? user[0] : false));
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    existingUserCheck().then((exists) => {
+      if (exists) {
+        if (exists.password === enteredPassword.current.value) {
+          localStorage.setItem('activeUser', exists.id);
+          history.push('/');
+        } else {
+          alert(
+            `Sorry that's not the password for ${exists.userName}! Make sure that your Caps Lock is off and try again.`
+          );
+        }
+      } else {
+        alert(`Sorry but that user doesn't exist. Do you have an account?`);
+      }
+    });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Avatar
+          src={require('/home/parker/workspace/codepal/src/img/codePal.png')}
+          className={classes.large}
+          variant="rounded"
+        />
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Username"
+            name="username"
+            inputRef={enteredUsername}
+            autoComplete="username"
             autoFocus
           />
           <TextField
@@ -77,6 +123,7 @@ export function SignIn() {
             required
             fullWidth
             name="password"
+            inputRef={enteredPassword}
             label="Password"
             type="password"
             id="password"
@@ -95,8 +142,7 @@ export function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs></Grid>
+          <Grid container justify="center">
             <Grid item>
               <Link href="#" variant="body2">
                 {"Don't have an account? Sign Up"}
@@ -110,4 +156,4 @@ export function SignIn() {
       </Box>
     </Container>
   );
-}
+};
