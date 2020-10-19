@@ -44,16 +44,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const addTest = (testObj) => {
-  return fetch('http://localhost:8088/tests', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(testObj),
-  }).then(console.log('Hopefully this did something?'));
-};
-
 // This will be where most of our edited JS will live, such as our Auth method and grabing the data to push to the
 // the user api
 export const SignIn = () => {
@@ -80,7 +70,9 @@ export const SignIn = () => {
       if (exists) {
         if (exists.password === enteredPassword.current.value) {
           localStorage.setItem('activeUser', exists.id);
-          history.push('/');
+          // This history will push you to the landing page where we'll have multiple entries.
+          history.push('/home');
+          console.log("congrats motherfucker you're in");
         } else {
           alert(
             `Sorry that's not the password for ${exists.userName}! Make sure that your Caps Lock is off and try again.`
@@ -124,7 +116,7 @@ export const SignIn = () => {
             fullWidth
             name="password"
             inputRef={enteredPassword}
-            label="Password"
+            label="Fake Password - NOT SECURE - DEMO ONLY"
             type="password"
             id="password"
             autoComplete="current-password"
