@@ -30,29 +30,24 @@ export const EntryList = () => {
   }));
 
   return (
-    <Container maxWidth="lg">
-      <CssBaseline />
-      <Grid
-        container
-        spacing={3}
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-        <h1>Entry</h1>
+    <Grid container direction="column">
+      <Grid item> This will be our header </Grid>
 
-        <div className="entries">
-          {entries.map((entry) => {
-            return (
-              <Grid item xs={12}>
-                <EntryCard key={entry.id} entry={entry} />
-              </Grid>
-            );
-          })}
-        </div>
-
-        <button>placeholder</button>
+      <Grid item container>
+        <Grid item xs={false} sm={2} />
+        <Grid item xs={12} sm={8}>
+          <Grid container spacing={4}>
+            {entries.map((entry) => {
+              return (
+                <Grid item xs={4}>
+                  <EntryCard key={entry.id} entry={entry} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Grid>
+        <Grid item xs={false} sm={2} />
       </Grid>
-    </Container>
+    </Grid>
   );
 };
