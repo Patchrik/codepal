@@ -4,6 +4,7 @@ import { EntryCard } from './EntryCard';
 import { useHistory } from 'react-router-dom';
 import { Container, CssBaseline, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import CodepalAppBar from './Header';
 
 export const EntryList = () => {
   const history = useHistory();
@@ -30,8 +31,10 @@ export const EntryList = () => {
   }));
 
   return (
-    <Grid container direction="column">
-      <Grid item> This will be our header </Grid>
+    <Grid container direction="column" spacing={1}>
+      <Grid item>
+        <CodepalAppBar />
+      </Grid>
 
       <Grid item container>
         <Grid item xs={false} sm={2} />
