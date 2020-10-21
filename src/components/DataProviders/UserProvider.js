@@ -48,6 +48,12 @@ export const UserProvider = (props) => {
     return fetch(`http://localhost:8088/users/${id}`).then((res) => res.json());
   };
 
+  async function getUserByUserName(userName) {
+    await fetch(`http://localhost:8088/users/${userName}`).then((res) =>
+      res.json()
+    );
+  }
+
   /*
         You return a context provider which has the
         `locations` state, the `addLocation` function,
@@ -63,6 +69,7 @@ export const UserProvider = (props) => {
         getUserById,
         UpdateUser,
         DeleteUser,
+        getUserByUserName,
       }}
     >
       {props.children}

@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { UserContext } from '../DataProviders/UserProvider';
+import { useHistory } from 'react-router-dom';
 
 // this will handle the state for the user form and allow use to capture the data to be sent to our
 // API that is holding our user data base
@@ -50,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CreateAccount() {
+  const history = useHistory();
+
   const classes = useStyles();
 
   const [user, setUser] = useState({});
@@ -165,10 +168,9 @@ export default function CreateAccount() {
             onClick={(event) => {
               event.preventDefault();
               constructUserObject();
-              console.log(
-                'You pressed submit and this is what I captured!',
-                user
-              );
+              localStorage.setItem('activeUserId', 0);
+              localStorage.setItem('activeUserName', user.userName);
+              history.push('/home');
             }}
           >
             Create Account!
