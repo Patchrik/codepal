@@ -30,10 +30,7 @@ export const EntryCard = ({ entry }) => {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+          Details
         </Button>
       </CardActions>
     </Card>
