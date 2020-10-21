@@ -19,7 +19,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  userName: {
+    fontStyle: 'italic',
+  },
 }));
+
+const clearLocalStorage = () => {
+  sessionStorage.removeItem('activeUserId');
+  sessionStorage.removeItem('activeUserName');
+};
 
 // You need to build a sign out funtion that will route the user to the login, and
 // will also clear the local storage.
@@ -39,7 +47,16 @@ export default function CodepalAppBar() {
           <Typography variant="h6" className={classes.title}>
             Codepal
           </Typography>
-          <Button color="inherit" href="http://localhost:3000/">
+          <Typography className={classes.userName} variant="subtitle1">
+            Hello {sessionStorage.getItem('activeUserName')}
+          </Typography>
+          <Button
+            color="inherit"
+            onClick={() => {
+              clearLocalStorage();
+            }}
+            href="http://localhost:3000/"
+          >
             Log Out
           </Button>
         </Toolbar>

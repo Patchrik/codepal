@@ -69,7 +69,8 @@ export const SignIn = () => {
     existingUserCheck().then((exists) => {
       if (exists) {
         if (exists.password === enteredPassword.current.value) {
-          localStorage.setItem('activeUser', exists.id);
+          sessionStorage.setItem('activeUserId', exists.id);
+          sessionStorage.setItem('activeUserName', exists.userName);
           // This history will push you to the landing page where we'll have multiple entries.
           history.push('/home');
           console.log("congrats motherfucker you're in");

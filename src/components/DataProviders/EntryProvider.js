@@ -12,6 +12,8 @@ export const EntryContext = createContext();
 export const EntryProvider = (props) => {
   const [entries, setEntries] = useState([]);
 
+  const [userEntries, setUserEntries] = useState([]);
+
   const getEntries = () => {
     return fetch('http://localhost:8088/entries')
       .then((res) => res.json())
@@ -50,6 +52,15 @@ export const EntryProvider = (props) => {
     );
   };
 
+  const getEntriesByUserId = async (userIdFromLogin) => {
+    const res = await fetch('http://localhost:8088/entries');
+    const value = await res.json();
+    const sortedValue = value.filter(
+      (entry) => entry.userId === parseInt(userIdFromLogin)
+    );
+    return setUserEntries(sortedValue);
+  };
+
   /*
         You return a context provider which has the
         `locations` state, the `addLocation` function,
@@ -65,6 +76,9 @@ export const EntryProvider = (props) => {
         getEntryById,
         UpdateEntry,
         DeleteEntry,
+        getEntriesByUserId,
+        userEntries,
+        setUserEntries,
       }}
     >
       {props.children}
