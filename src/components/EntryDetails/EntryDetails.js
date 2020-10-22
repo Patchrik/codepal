@@ -21,8 +21,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const EntryDetails = () => {
+  debugger;
   const { getEntryById } = useContext(EntryContext);
-  const { getEntryTagsByEntryId } = useContext(EntryTagContext);
+  const { getEntryTagsByEntryId, FilteredTagEntries } = useContext(
+    EntryTagContext
+  );
 
   const [entry, setEntry] = useState({});
 
@@ -41,7 +44,7 @@ export const EntryDetails = () => {
       .then(getEntryTagsByEntryId(entryId))
       .then((response) => {
         debugger;
-        setEntryTags(response);
+        setEntryTags(FilteredTagEntries);
       });
   }, []);
 
