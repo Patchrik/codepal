@@ -15,11 +15,17 @@ export const EntryDetails = () => {
       <Grid item container>
         <Grid item xs={false} sm={2} />
         <Grid item xs={12} sm={8}>
-          <Grid container spacing={4}>
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100%' }}
+          >
             <Grid item={12}>
               <div className="EntryDetails">
                 <h2>Using CKEditor 5 build in React</h2>
                 <CKEditor
+                  className="textField"
                   editor={ClassicEditor}
                   data="<p>Hello from CKEditor 5!</p>"
                   onInit={(editor) => {
