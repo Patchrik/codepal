@@ -30,7 +30,7 @@ export const EntryProvider = (props) => {
     }).then(getEntries);
   };
 
-  const DeleteEntry = (entryId) => {
+  const DeleteEntryById = (entryId) => {
     return fetch(`http://localhost:8088/entries/${entryId}`, {
       method: 'DELETE',
     }).then(getEntries);
@@ -46,10 +46,9 @@ export const EntryProvider = (props) => {
     }).then(getEntries);
   };
 
-  const getEntryById = (id) => {
-    return fetch(`http://localhost:8088/entries/${id}`).then((res) =>
-      res.json()
-    );
+  const getEntryById = async (id) => {
+    const res = await fetch(`http://localhost:8088/entries/${id}`);
+    return await res.json();
   };
 
   const getEntriesByUserId = async (userIdFromLogin) => {
@@ -75,10 +74,9 @@ export const EntryProvider = (props) => {
         addEntry,
         getEntryById,
         UpdateEntry,
-        DeleteEntry,
+        DeleteEntryById,
         getEntriesByUserId,
         userEntries,
-        setUserEntries,
       }}
     >
       {props.children}

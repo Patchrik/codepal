@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useContext, useState, useEffect } from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Button, Grid, Paper } from '@material-ui/core';
+import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import CodepalAppBar from '../EntryList/Header';
 import { EntryContext } from '../DataProviders/EntryProvider';
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
-import { Delete } from '@material-ui/icons';
+import { useParams } from 'react-router-dom';
+import { EntryTagContext } from '../DataProviders/EntryTagProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,13 +21,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const EntryDetails = () => {
+  const { getEntryById } = useContext(EntryContext);
+  const { getEntryTagsByEntryId } = useContext(EntryTagContext);
+
+  const [entry, setEntry] = useState({});
+
+  const [entryTags, setEntryTags] = useState([]);
+
+  const { entryId } = useParams();
+
   const classes = useStyles();
 
-  const handleDelete = () => {
+  useEffect(() => {
+    console.log('useEffect', entryId);
+    getEntryById(entryId)
+      .then((response) => {
+        setEntry(response);
+      })
+      .then(getEntryTagsByEntryId(entryId))
+      .then((response) => {
+        debugger;
+        setEntryTags(response);
+      });
+  }, []);
+
+  const handleDeleteTag = () => {
     console.info('You clicked the delete icon.');
   };
 
-  const handleClick = () => {
+  const handleClickTag = () => {
     console.info('You clicked the Chip.');
   };
 
@@ -55,36 +75,41 @@ export const EntryDetails = () => {
                   container
                   alignItems="center"
                   justify="center"
+                  direction="column"
                   style={{ margin: '1em' }}
                 >
+                  <Typography variant="h6">
+                    {entry.title} - Written on {entry.date}
+                  </Typography>
                   <CKEditor
                     className="textField"
+                    disabled={true}
                     editor={ClassicEditor}
-                    data="<p>Hello from CKEditor 5!</p>"
+                    data={entry.entryText}
+                    config={{
+                      toolbar: [
+                        // We're taking out the toolbar because we do not need it when using
+                        // the editor as a rich text reader
+                      ],
+                    }}
                     onInit={(editor) => {
                       // You can store the "editor" and use when it is needed.
                       console.log('Editor is ready to use!', editor);
                     }}
-                    onChange={(event, editor) => {
-                      const data = editor.getData();
-                      console.log({ event, editor, data });
-                    }}
-                    onBlur={(event, editor) => {
-                      console.log('Blur.', editor);
-                    }}
-                    onFocus={(event, editor) => {
-                      console.log('Focus.', editor);
-                    }}
                   />
                 </Grid>
                 <div className={classes.root}>
-                  <Chip
-                    size="small"
-                    // icon={<FaceIcon />}
-                    label="Clickable Deletable"
-                    onClick={handleClick}
-                    onDelete={handleDelete}
-                  />
+                  {entryTags.map((entry) => {
+                    return (
+                      <Chip
+                        key={entry.id}
+                        size="small"
+                        label={entry.tag.name}
+                        onClick={handleClickTag}
+                        onDelete={handleDeleteTag}
+                      />
+                    );
+                  })}
                 </div>
                 <Grid
                   item
