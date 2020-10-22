@@ -41,10 +41,9 @@ export const EntryTagProvider = (props) => {
       'http://localhost:8088/entryTags?_expand=tag&_expand=entry'
     );
     const value = await res.json();
-    debugger;
-    const sortedValue = value.filter(
-      (entryTag) => parseInt(entryTag.entryId) === parseInt(entryIdFromParams)
-    );
+    const sortedValue = value.filter((entryTag) => {
+      return parseInt(entryTag.entryId) === parseInt(entryIdFromParams);
+    });
     return setFilteredTagEntries(sortedValue);
   };
 

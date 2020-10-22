@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {} from 'module';
 import { Avatar } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +46,10 @@ export default function CodepalAppBar() {
             variant="rounded"
           />
           <Typography variant="h6" className={classes.title}>
-            Codepal
+            {/* TODO Hey you little slut make this shit clickable */}
+            <Link to={'/home'} style={{ textDecoration: 'none' }}>
+              Codepal
+            </Link>
           </Typography>
           <Typography className={classes.userName} variant="subtitle1">
             Hello {sessionStorage.getItem('activeUserName')}

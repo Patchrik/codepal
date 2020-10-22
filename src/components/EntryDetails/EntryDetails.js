@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const EntryDetails = () => {
-  debugger;
   const { getEntryById } = useContext(EntryContext);
   const { getEntryTagsByEntryId, FilteredTagEntries } = useContext(
     EntryTagContext
@@ -36,17 +35,18 @@ export const EntryDetails = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log('useEffect', entryId);
     getEntryById(entryId)
       .then((response) => {
         setEntry(response);
       })
-      .then(getEntryTagsByEntryId(entryId))
-      .then((response) => {
-        debugger;
-        setEntryTags(FilteredTagEntries);
+      .then((_) => {
+        getEntryTagsByEntryId(entryId);
       });
   }, []);
+
+  useEffect(() => {
+    setEntryTags(FilteredTagEntries);
+  }, [FilteredTagEntries]);
 
   const handleDeleteTag = () => {
     console.info('You clicked the delete icon.');
@@ -61,7 +61,6 @@ export const EntryDetails = () => {
       <Grid item>
         <CodepalAppBar />
       </Grid>
-
       <Grid item container>
         <Grid item xs={false} sm={2} />
         <Grid item xs={12} sm={8}>
@@ -97,7 +96,6 @@ export const EntryDetails = () => {
                     }}
                     onInit={(editor) => {
                       // You can store the "editor" and use when it is needed.
-                      console.log('Editor is ready to use!', editor);
                     }}
                   />
                 </Grid>
