@@ -15,6 +15,30 @@
       "email": "pklly92@gmail.com",
       "password": "test123",
       "id": 2
+    },
+    {
+      "firstName": "greg",
+      "lastName": "gergerston",
+      "userName": "greg",
+      "email": "greg@greg.com",
+      "password": "greg",
+      "id": 3
+    },
+    {
+      "firstName": "tom",
+      "lastName": "tom",
+      "userName": "tom",
+      "email": "tom",
+      "password": "tom",
+      "id": 4
+    },
+    {
+      "firstName": "chad",
+      "lastName": "chad",
+      "userName": "chad",
+      "email": "chad",
+      "password": "chad",
+      "id": 5
     }
   ],
   "entries": [
