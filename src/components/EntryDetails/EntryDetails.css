@@ -1,9 +1,4 @@
-.EntryDetails {
-  height: 100%;
-  width: 100%;
-}
-
-.textField {
-  height: 100%;
+.ck-editor {
+  border-radius: 10px;
   width: 100%;
 }
