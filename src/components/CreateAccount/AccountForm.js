@@ -8,7 +8,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -79,6 +78,10 @@ export default function CreateAccount() {
       userName: user.userName,
       email: user.email,
       password: user.password,
+    }).then((userObj) => {
+      sessionStorage.setItem('activeUserId', userObj.id);
+      sessionStorage.setItem('activeUserName', userObj.userName);
+      history.push('/home');
     });
   };
 
@@ -168,16 +171,13 @@ export default function CreateAccount() {
             onClick={(event) => {
               event.preventDefault();
               constructUserObject();
-              localStorage.setItem('activeUserId', 0);
-              localStorage.setItem('activeUserName', user.userName);
-              history.push('/home');
             }}
           >
             Create Account!
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Link href="http://localhost:3000/" variant="body2">
+              <Link to="/" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

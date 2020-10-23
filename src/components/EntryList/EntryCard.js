@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -29,12 +30,11 @@ export const EntryCard = ({ entry }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+        <Link to={`/details/${entry.id}`}>
+          <Button size="small" color="primary">
+            Details
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-class App extends Component {
+class TextEditor extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="TextEditor">
         <h2>Using CKEditor 5 build in React</h2>
         <CKEditor
           editor={ClassicEditor}
@@ -30,4 +30,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default TextEditor;

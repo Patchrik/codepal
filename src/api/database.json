@@ -79,6 +79,21 @@
       "id": 1,
       "entryId": 1,
       "tagId": 1
+    },
+    {
+      "id": 2,
+      "entryId": 1,
+      "tagId": 1
+    },
+    {
+      "id": 3,
+      "entryId": 1,
+      "tagId": 1
+    },
+    {
+      "id": 4,
+      "entryId": 1,
+      "tagId": 1
     }
   ],
   "tests": [
