@@ -46,7 +46,6 @@ export default function CodepalAppBar() {
             variant="rounded"
           />
           <Typography variant="h6" className={classes.title}>
-            {/* TODO Hey you little slut make this shit clickable */}
             <Link to={'/home'} style={{ textDecoration: 'none' }}>
               Codepal
             </Link>
