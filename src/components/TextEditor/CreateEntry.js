@@ -2,12 +2,16 @@ import React, { Component, useContext, useState, useEffect } from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Button, Grid, Paper, Typography } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 import CodepalAppBar from '../EntryList/Header';
 import { EntryContext } from '../DataProviders/EntryProvider';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import { EntryTagContext } from '../DataProviders/EntryTagProvider';
 import { TagsContext } from '../DataProviders/TagProvider';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,9 +22,20 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(0.5),
     },
   },
+  textRoot: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200,
+    },
+  },
 }));
 
-export const CreateEntry = () => {
+export const CreateEntry = (props) => {
   const { addEntry } = useContext(EntryContext);
 
   const { getEntryTagsByEntryId, FilteredTagEntries } = useContext(
@@ -33,7 +48,17 @@ export const CreateEntry = () => {
 
   const [entry, setEntry] = useState({});
 
-  const [entryTags, setEntryTags] = useState([]);
+  const [entryTags, setEntryTags] = useState({});
+
+  const [tag, setTag] = useState({});
+
+  const handleControlledInputChange = (event) => {
+    const newEntry = { ...entry };
+
+    newEntry[event.target.name] = event.target.value;
+
+    setEntry(newEntry);
+  };
 
   const classes = useStyles();
 
@@ -43,6 +68,10 @@ export const CreateEntry = () => {
 
   const handleClickTag = () => {
     console.info('You clicked the Chip.');
+  };
+
+  const handleTagChange = (event) => {
+    setTag(event.target.value);
   };
 
   return (
@@ -69,31 +98,47 @@ export const CreateEntry = () => {
                   direction="column"
                   style={{ margin: '1em' }}
                 >
-                  <Typography variant="h6">
-                    {entry.title} - Written on {entry.date}
-                  </Typography>
+                  <Grid
+                    container
+                    justify="space-evenly"
+                    style={{ margin: '1em' }}
+                  >
+                    <form
+                      className={classes.textRoot}
+                      noValidate
+                      autoComplete="off"
+                    >
+                      <TextField id="standard-basic" label="Entry Title" />
+                    </form>
+                  </Grid>
                   <CKEditor
                     className="textField"
-                    disabled={true}
                     editor={ClassicEditor}
-                    data={entry.entryText}
+                    data="You need to read about how to use the built in getData function"
                     onInit={(editor) => {
                       // You can store the "editor" and use when it is needed.
                     }}
                   />
+                  <InputLabel id="demo-simple-select-label">Tags</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={tag}
+                    onChange={handleTagChange}
+                  >
+                    <MenuItem value={10}>HTML</MenuItem>
+                    <MenuItem value={20}>CSS</MenuItem>
+                    <MenuItem value={30}>JavaScript</MenuItem>
+                  </Select>
                 </Grid>
                 <div className={classes.root}>
-                  {entryTags.map((entry) => {
-                    return (
-                      <Chip
-                        key={entry.id}
-                        size="small"
-                        label={entry.tag.name}
-                        onClick={handleClickTag}
-                        onDelete={handleDeleteTag}
-                      />
-                    );
-                  })}
+                  <Chip
+                    key="placeholder 1"
+                    size="small"
+                    label="placeholder"
+                    onClick={handleClickTag}
+                    onDelete={handleDeleteTag}
+                  />
                 </div>
                 <Grid
                   item
@@ -109,7 +154,7 @@ export const CreateEntry = () => {
                       variant="contained"
                       color="primary"
                     >
-                      Edit
+                      Save
                     </Button>
                   </Grid>
                   <Grid item>
@@ -119,7 +164,7 @@ export const CreateEntry = () => {
                       variant="contained"
                       color="primary"
                     >
-                      Delete
+                      Cancel
                     </Button>
                   </Grid>
                 </Grid>
