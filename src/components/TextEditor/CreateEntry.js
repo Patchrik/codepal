@@ -50,6 +50,8 @@ export const CreateEntry = (props) => {
 
   const [entryTags, setEntryTags] = useState({});
 
+  const [richText, setRichText] = useState({});
+
   const [tag, setTag] = useState({});
 
   const handleControlledInputChange = (event) => {
@@ -108,7 +110,11 @@ export const CreateEntry = (props) => {
                       noValidate
                       autoComplete="off"
                     >
-                      <TextField id="standard-basic" label="Entry Title" />
+                      <TextField
+                        id="standard-basic"
+                        label="Entry Title"
+                        value={'Entry Title'}
+                      />
                     </form>
                   </Grid>
                   <CKEditor
@@ -118,18 +124,29 @@ export const CreateEntry = (props) => {
                     onInit={(editor) => {
                       // You can store the "editor" and use when it is needed.
                     }}
+                    onChange={(event, editor) => {
+                      setRichText(editor.getData());
+                      console.log({ event, editor, richText });
+                    }}
                   />
-                  <InputLabel id="demo-simple-select-label">Tags</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={tag}
-                    onChange={handleTagChange}
-                  >
-                    <MenuItem value={10}>HTML</MenuItem>
-                    <MenuItem value={20}>CSS</MenuItem>
-                    <MenuItem value={30}>JavaScript</MenuItem>
-                  </Select>
+                  <Grid container justify="space-around">
+                    <Grid direction="column">
+                      <InputLabel id="tags-select-label">Tags</InputLabel>
+                      <Select
+                        labelId="tags-select-label"
+                        id="tag-select"
+                        value={tag}
+                        onChange={handleTagChange}
+                      >
+                        <MenuItem value={10}>HTML</MenuItem>
+                        <MenuItem value={20}>CSS</MenuItem>
+                        <MenuItem value={30}>JavaScript</MenuItem>
+                      </Select>
+                    </Grid>
+                    <Button type="button" variant="contained" color="primary">
+                      Add Tag
+                    </Button>
+                  </Grid>
                 </Grid>
                 <div className={classes.root}>
                   <Chip
