@@ -77,9 +77,21 @@ export const CreateEntry = (props) => {
   };
 
   // Function for adding tags
-  const addTag = () => {
+  const addEntryTag = () => {
     // code to add the tag to the Dom and load it into the entry
-  }
+  };
+
+  // This will be our builder function to create the entryObj to add to the api
+
+  const constructEntryObject = () => {
+    const createdDate = new Intl.DateTimeFormat('en-US').format(new Date());
+    addEntry({
+      userId: parseInt(sessionStorage.getItem('activeUserId')),
+      title: entry.entryTitle,
+      entryText: richText,
+      date: createdDate,
+    });
+  };
 
   return (
     <Grid container direction="column">
@@ -116,9 +128,11 @@ export const CreateEntry = (props) => {
                       autoComplete="off"
                     >
                       <TextField
+                        name="entryTitle"
                         id="standard-basic"
                         label="Entry Title"
-                        value={'Entry Title'}
+                        onChange={handleControlledInputChange}
+                        defaultValue={entry.entryTitle}
                       />
                     </form>
                   </Grid>
@@ -131,13 +145,17 @@ export const CreateEntry = (props) => {
                     }}
                     onChange={(event, editor) => {
                       setRichText(editor.getData());
-                      console.log({ event, editor, richText });
                     }}
                   />
-                  <Grid container justify="space-around">
+                  <Grid
+                    container
+                    justify="space-evenly"
+                    style={{ margin: '1em' }}
+                  >
                     <Grid direction="column">
                       <InputLabel id="tags-select-label">Tags</InputLabel>
                       <Select
+                        name="tagDropdown"
                         labelId="tags-select-label"
                         id="tag-select"
                         value={tag}
@@ -149,6 +167,7 @@ export const CreateEntry = (props) => {
                         <MenuItem value={30}>JavaScript</MenuItem>
                       </Select>
                     </Grid>
+                    {/* This will need to call a function that add a tag */}
                     <Button type="button" variant="contained" color="primary">
                       Add Tag
                     </Button>
@@ -176,6 +195,10 @@ export const CreateEntry = (props) => {
                       fullWidth
                       variant="contained"
                       color="primary"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        constructEntryObject();
+                      }}
                     >
                       Save
                     </Button>
