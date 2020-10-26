@@ -76,6 +76,11 @@ export const CreateEntry = (props) => {
     setTag(event.target.value);
   };
 
+  // Function for adding tags
+  const addTag = () => {
+    // code to add the tag to the Dom and load it into the entry
+  }
+
   return (
     <Grid container direction="column">
       <Grid item>
@@ -138,6 +143,7 @@ export const CreateEntry = (props) => {
                         value={tag}
                         onChange={handleTagChange}
                       >
+                        {/* Here is the area where we will need to add our loop to create our tags */}
                         <MenuItem value={10}>HTML</MenuItem>
                         <MenuItem value={20}>CSS</MenuItem>
                         <MenuItem value={30}>JavaScript</MenuItem>
