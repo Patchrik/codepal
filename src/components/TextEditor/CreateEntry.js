@@ -42,7 +42,7 @@ export const CreateEntry = (props) => {
     EntryTagContext
   );
 
-  const { getTags, addTag, getTagById, DeleteTagsById } = useContext(
+  const { getTags, addTag, getTagById, DeleteTagsById, tags } = useContext(
     TagsContext
   );
 
@@ -53,6 +53,11 @@ export const CreateEntry = (props) => {
   const [richText, setRichText] = useState({});
 
   const [tag, setTag] = useState({});
+
+  // This will be our first useEffect for the page to grab the first list of tags.
+  useEffect(() => {
+    getTags();
+  }, []);
 
   const handleControlledInputChange = (event) => {
     const newEntry = { ...entry };
@@ -76,10 +81,45 @@ export const CreateEntry = (props) => {
     setTag(event.target.value);
   };
 
-  // Function for adding tags
-  const addEntryTag = () => {
-    // code to add the tag to the Dom and load it into the entry
+  // This will be our simple render Tag State
+  const [renderTags, setRenderTags] = useState([]);
+
+  // This is an array to simply hold on to the tags for render only - THIS WILL NOT DO ANYTHING ELSE
+  const RenderTagsArray = [];
+  const UpdateRenderTags = () => {
+    const tagHolder = tags.find((tagObj) => {
+      debugger;
+      return parseInt(tagObj.id) === parseInt(tag);
+    });
+    RenderTagsArray.push(tagHolder);
   };
+
+  // Function for adding tags
+  const EntryTagsHoldingArray = [];
+  const addEntryTagToHoldingArray = () => {
+    // code to add the tag to the Dom and load it into the entry
+    const tempEntryTagObj = {
+      entryId: parseInt(tag),
+    };
+    EntryTagsHoldingArray.push(tempEntryTagObj);
+    UpdateRenderTags();
+    console.log(
+      'This should be an array with the holdeing tags',
+      EntryTagsHoldingArray
+    );
+    console.log('This should be the render tags array', RenderTagsArray);
+  };
+
+  // This will be a use Effect for holding a temp array. I'm thinking that this should have been in
+  // state. But I'm more comfortable writing it like this.
+  // This will be for updating the rendered tags
+
+  // This shit breaks it and I'm not sure why. It should only be updating when a new TagObj is added
+  // but it just infinitly loops.
+
+  // useEffect(() => {
+  //   setRenderTags(RenderTagsArray);
+  // }, [RenderTagsArray]);
 
   // This will be our builder function to create the entryObj to add to the api
 
@@ -139,7 +179,7 @@ export const CreateEntry = (props) => {
                   <CKEditor
                     className="textField"
                     editor={ClassicEditor}
-                    data="You need to read about how to use the built in getData function"
+                    data="This is the body text"
                     onInit={(editor) => {
                       // You can store the "editor" and use when it is needed.
                     }}
@@ -161,26 +201,38 @@ export const CreateEntry = (props) => {
                         value={tag}
                         onChange={handleTagChange}
                       >
-                        {/* Here is the area where we will need to add our loop to create our tags */}
-                        <MenuItem value={10}>HTML</MenuItem>
-                        <MenuItem value={20}>CSS</MenuItem>
-                        <MenuItem value={30}>JavaScript</MenuItem>
+                        {tags.map((tagObj) => {
+                          return (
+                            <MenuItem key={tagObj.id} value={tagObj.id}>
+                              {tagObj.name}
+                            </MenuItem>
+                          );
+                        })}
                       </Select>
                     </Grid>
                     {/* This will need to call a function that add a tag */}
-                    <Button type="button" variant="contained" color="primary">
+                    <Button
+                      type="button"
+                      variant="contained"
+                      color="primary"
+                      onClick={addEntryTagToHoldingArray}
+                    >
                       Add Tag
                     </Button>
                   </Grid>
                 </Grid>
                 <div className={classes.root}>
-                  <Chip
-                    key="placeholder 1"
-                    size="small"
-                    label="placeholder"
-                    onClick={handleClickTag}
-                    onDelete={handleDeleteTag}
-                  />
+                  {RenderTagsArray.map((tagObj) => {
+                    return (
+                      <Chip
+                        key={tagObj.id}
+                        size="small"
+                        label={tagObj.name}
+                        onClick={handleClickTag}
+                        onDelete={handleDeleteTag}
+                      />
+                    );
+                  })}
                 </div>
                 <Grid
                   item
