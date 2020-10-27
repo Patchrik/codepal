@@ -6,7 +6,7 @@ import CodepalAppBar from '../EntryList/Header';
 import { EntryContext } from '../DataProviders/EntryProvider';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { EntryTagContext } from '../DataProviders/EntryTagProvider';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const EntryDetails = () => {
-  const { getEntryById } = useContext(EntryContext);
+  const { getEntryById, DeleteEntryById } = useContext(EntryContext);
   const { getEntryTagsByEntryId, FilteredTagEntries } = useContext(
     EntryTagContext
   );
@@ -33,6 +33,8 @@ export const EntryDetails = () => {
   const { entryId } = useParams();
 
   const classes = useStyles();
+
+  const history = useHistory();
 
   useEffect(() => {
     getEntryById(entryId)
@@ -54,6 +56,13 @@ export const EntryDetails = () => {
 
   const handleClickTag = () => {
     console.info('You clicked the Chip.');
+  };
+
+  // This is going to be the delete entry function that is used below.
+  const deleteEntry = () => {
+    DeleteEntryById(entryId).then(() => {
+      history.push('/home');
+    });
   };
 
   return (
@@ -106,6 +115,7 @@ export const EntryDetails = () => {
                         key={entry.id}
                         size="small"
                         label={entry.tag.name}
+                        // TODO You don't need these I don't think so you need to get rid of them
                         onClick={handleClickTag}
                         onDelete={handleDeleteTag}
                       />
@@ -126,6 +136,8 @@ export const EntryDetails = () => {
                       variant="contained"
                       color="primary"
                     >
+                      {/* TODO You need to finsh the route to the create form and refactor it so
+                      that you can use the form as an edit form as well. */}
                       Edit
                     </Button>
                   </Grid>
@@ -135,7 +147,9 @@ export const EntryDetails = () => {
                       fullWidth
                       variant="contained"
                       color="primary"
+                      onClick={deleteEntry}
                     >
+                      {/* You need to create a delete function to handle your onClick */}
                       Delete
                     </Button>
                   </Grid>

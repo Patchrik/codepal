@@ -61,17 +61,28 @@
       "date": "12-6-1774"
     },
     {
-      "id": 7,
       "userId": 2,
-      "title": "Testing Our filter React",
-      "entryText": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a",
-      "date": "12-6-1774"
+      "title": "Saving the UserId as an Int",
+      "entryText": "<p>Alright so far so good. But you need to make sure that the data is sent in the right type. Which is what this test is for.</p>",
+      "date": "10/26/2020",
+      "id": 10
+    },
+    {
+      "userId": 2,
+      "title": "Here's a test for the Details",
+      "entryText": "<p>We're about to <strong>SEE</strong> what happens when we use some rich text, <i>I expect this to look pretty janky.</i> But <strong>HEY </strong>you have to try. <i>Yah <strong>YEET</strong></i></p>",
+      "date": "10/26/2020",
+      "id": 11
     }
   ],
   "tags": [
     {
       "id": 1,
       "name": "React js"
+    },
+    {
+      "id": 2,
+      "name": "React State"
     }
   ],
   "entryTags": [

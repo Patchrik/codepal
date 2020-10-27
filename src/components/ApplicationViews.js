@@ -4,9 +4,11 @@ import CreateAccount from './CreateAccount/AccountForm';
 import { EntryProvider } from './DataProviders/EntryProvider';
 import { UserProvider } from './DataProviders/UserProvider';
 import { EntryTagProvider } from './DataProviders/EntryTagProvider';
+import { TagProvider } from './DataProviders/TagProvider';
 import { SignIn } from './Login/SignIn';
 import { EntryList } from './EntryList/EntryContainer';
 import EntryDetails from './EntryDetails/EntryDetails';
+import { CreateEntry } from './TextEditor/CreateEntry';
 
 export const ApplicationViews = (props) => {
   return (
@@ -40,6 +42,18 @@ export const ApplicationViews = (props) => {
             </Route>
           </EntryProvider>
         </EntryTagProvider>
+      </UserProvider>
+
+      <UserProvider>
+        <TagProvider>
+          <EntryTagProvider>
+            <EntryProvider>
+              <Route exact path="/create">
+                <CreateEntry />
+              </Route>
+            </EntryProvider>
+          </EntryTagProvider>
+        </TagProvider>
       </UserProvider>
     </>
   );

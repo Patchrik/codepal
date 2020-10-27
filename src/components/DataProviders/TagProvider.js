@@ -12,12 +12,11 @@ export const TagsContext = createContext();
 export const TagProvider = (props) => {
   const [tags, setTags] = useState([]);
 
-  const [userTags, setUserTags] = useState([]);
-
-  const getTags = () => {
-    return fetch('http://localhost:8088/tags')
-      .then((res) => res.json())
-      .then(setTags);
+  const getTags = async () => {
+    const res = await fetch('http://localhost:8088/tags');
+    const value = await res.json();
+    setTags(value);
+    return value;
   };
 
   const addTag = (tagsObj) => {
@@ -55,8 +54,6 @@ export const TagProvider = (props) => {
         addTag,
         getTagById,
         DeleteTagsById,
-        userTags,
-        setUserTags,
       }}
     >
       {props.children}
