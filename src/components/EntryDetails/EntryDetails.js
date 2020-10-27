@@ -50,6 +50,10 @@ export const EntryDetails = () => {
     setEntryTags(FilteredTagEntries);
   }, [FilteredTagEntries]);
 
+  const handleClick = (tag) => {
+    window.open(`http://www.google.com/search?q=${tag.tag.name}`, '_blank');
+  };
+
   // This is going to be the delete entry function that is used below.
   const deleteEntry = () => {
     DeleteEntryById(entryId).then(() => {
@@ -101,12 +105,14 @@ export const EntryDetails = () => {
                   />
                 </Grid>
                 <div className={classes.root}>
-                  {entryTags.map((entry) => {
+                  {entryTags.map((tag) => {
                     return (
                       <Chip
-                        key={entry.id}
+                        key={tag.id}
                         size="small"
-                        label={entry.tag.name}
+                        label={tag.tag.name}
+                        // TODO You need to figure out why this is causing a
+                        onClick={() => handleClick(tag)}
                       />
                     );
                   })}
