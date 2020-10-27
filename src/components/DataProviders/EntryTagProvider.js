@@ -27,7 +27,7 @@ export const EntryTagProvider = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(EntryTagObj),
-    }).then(getEntryTags);
+    });
   };
 
   const DeleteEntryTagById = (EntryTagsObj) => {
@@ -47,6 +47,11 @@ export const EntryTagProvider = (props) => {
     return setFilteredTagEntries(sortedValue);
   };
 
+  const addSelectedEntryTags = (tagsArr) => {
+    const promiseArray = tagsArr.map(addEntryTag);
+    return Promise.all(promiseArray);
+  };
+
   /*
         You return a context provider which has the
         `locations` state, the `addLocation` function,
@@ -62,6 +67,7 @@ export const EntryTagProvider = (props) => {
         DeleteEntryTagById,
         FilteredTagEntries,
         getEntryTagsByEntryId,
+        addSelectedEntryTags,
       }}
     >
       {props.children}

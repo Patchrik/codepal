@@ -22,13 +22,6 @@ export const EntryList = () => {
     EntryContext
   );
 
-  // Since you are no longer ALWAYS displaying all of the entries
-  // const [userEntries, setUserEntries] = useState([]);
-
-  // Empty dependency array - useEffect only runs after first render
-
-  // this is a async mess right now. This needs to get moved to the account form or just reRoute
-  // the user through the sign in page (which will be easier.)
   useEffect(() => {
     getEntriesByUserId(activeUser.id);
   }, []);

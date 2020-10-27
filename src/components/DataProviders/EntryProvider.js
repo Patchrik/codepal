@@ -27,7 +27,7 @@ export const EntryProvider = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(entryObj),
-    }).then(getEntries);
+    }).then((res) => res.json());
   };
 
   const DeleteEntryById = (entryId) => {

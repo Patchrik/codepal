@@ -12,6 +12,8 @@ import { TagsContext } from '../DataProviders/TagProvider';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import { TagSelector, TagSelectorHoldingArray } from './TagSelector';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 export const CreateEntry = (props) => {
   const { addEntry } = useContext(EntryContext);
 
-  const { getEntryTagsByEntryId, FilteredTagEntries } = useContext(
+  const { getEntryTagsByEntryId, addSelectedEntryTags } = useContext(
     EntryTagContext
   );
 
@@ -52,17 +54,19 @@ export const CreateEntry = (props) => {
 
   const [richText, setRichText] = useState({});
 
-  // This will be our simple render Tag State
-  const [EntryTagsHoldingArray, setEntryTagsHoldingArray] = useState([]);
+  const [
+    LocalTagSelectorHoldingArray,
+    setLocalTagSelectorHoldingArray,
+  ] = useState([]);
 
   // This will be our first useEffect for the page to grab the first list of tags.
   useEffect(() => {
-    getTags().then(() => {
-      setEntryTagsHoldingArray(tags);
+    getTags().then((res) => {
+      setLocalTagSelectorHoldingArray([...res]);
     });
   }, []);
 
-  useEffect(() => {});
+  const history = useHistory();
 
   const handleControlledInputChange = (event) => {
     const newEntry = { ...entry };
@@ -74,14 +78,26 @@ export const CreateEntry = (props) => {
 
   const classes = useStyles();
 
-  const handleDeleteTag = (tagObj) => {
-    console.info('You clicked the delete icon.');
+  const handleDeleteTag = (tag) => {
+    const updatedState = LocalTagSelectorHoldingArray.map((item) => {
+      if (parseInt(item.id) === parseInt(tag.id)) {
+        item.isSelected = false;
+      }
+      return item;
+    });
+
+    setLocalTagSelectorHoldingArray(updatedState);
   };
 
-  const handleClickTag = (tagObj) => {
-    console.log('This should be a tag obj', tagObj);
-    tagObj.isSelected = true;
-    console.log('this should now be true', tagObj.isSelected);
+  const handleClickTag = (tag) => {
+    const updatedState = LocalTagSelectorHoldingArray.map((item) => {
+      if (parseInt(item.id) === parseInt(tag.id)) {
+        item.isSelected = true;
+      }
+      return item;
+    });
+
+    setLocalTagSelectorHoldingArray(updatedState);
   };
 
   // This will be our builder function to create the entryObj to add to the api
@@ -93,7 +109,19 @@ export const CreateEntry = (props) => {
       title: entry.entryTitle,
       entryText: richText,
       date: createdDate,
-    });
+    })
+      .then((addedEntry) => {
+        const selectedTags = LocalTagSelectorHoldingArray.filter(
+          (tag) => tag.isSelected
+        );
+        const entryTags = selectedTags.map((tag) => {
+          return { entryId: addedEntry.id, tagId: tag.id };
+        });
+        return addSelectedEntryTags(entryTags);
+      })
+      .then(() => {
+        history.push('/home');
+      });
   };
 
   return (
@@ -152,7 +180,17 @@ export const CreateEntry = (props) => {
                   />
                 </Grid>
                 <div className={classes.root}>
-                  {tags.map((tagObj) => {
+                  {LocalTagSelectorHoldingArray.map((tagObj) => {
+                    return (
+                      <TagSelector
+                        key={tagObj.id}
+                        tag={tagObj}
+                        handleClickTag={handleClickTag}
+                        handleDeleteTag={handleDeleteTag}
+                      />
+                    );
+                  })}
+                  {/* {tags.map((tagObj) => {
                     return (
                       <Chip
                         key={tagObj.id}
@@ -167,7 +205,7 @@ export const CreateEntry = (props) => {
                         }}
                       />
                     );
-                  })}
+                  })} */}
                 </div>
                 <Grid
                   item
