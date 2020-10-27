@@ -26,6 +26,7 @@ export const TagProvider = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(tagsObj),
+      // Probably don't need the getTags call on the end of this.
     }).then(getTags);
   };
 

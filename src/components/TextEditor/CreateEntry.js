@@ -1,18 +1,14 @@
-import React, { Component, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Button, Grid, Paper, Typography } from '@material-ui/core';
+import { Button, Grid, Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import CodepalAppBar from '../EntryList/Header';
 import { EntryContext } from '../DataProviders/EntryProvider';
 import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
 import { EntryTagContext } from '../DataProviders/EntryTagProvider';
 import { TagsContext } from '../DataProviders/TagProvider';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import { TagSelector, TagSelectorHoldingArray } from './TagSelector';
+import { TagSelector } from './TagSelector';
 import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
