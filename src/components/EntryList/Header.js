@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {} from 'module';
 import { Avatar } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,7 @@ const clearLocalStorage = () => {
 
 export default function CodepalAppBar() {
   const classes = useStyles();
-
+  const history = useHistory();
   return (
     <div className={classes.root}>
       <AppBar position="static" color="transparent">
@@ -54,6 +54,15 @@ export default function CodepalAppBar() {
             Hello {sessionStorage.getItem('activeUserName')}
           </Typography>
           {/* TODO You need to add a button to create an entry right here. */}
+          <Button
+            color="inherit"
+            onClick={() => {
+              history.push('/create');
+            }}
+          >
+            Create
+          </Button>
+
           <Button
             color="inherit"
             onClick={() => {

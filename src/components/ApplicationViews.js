@@ -48,6 +48,18 @@ export const ApplicationViews = (props) => {
         <TagProvider>
           <EntryTagProvider>
             <EntryProvider>
+              <Route exact path="/details/edit/:entryId(\d+)">
+                <CreateEntry />
+              </Route>
+            </EntryProvider>
+          </EntryTagProvider>
+        </TagProvider>
+      </UserProvider>
+
+      <UserProvider>
+        <TagProvider>
+          <EntryTagProvider>
+            <EntryProvider>
               <Route exact path="/create">
                 <CreateEntry />
               </Route>

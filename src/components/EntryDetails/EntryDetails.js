@@ -50,14 +50,6 @@ export const EntryDetails = () => {
     setEntryTags(FilteredTagEntries);
   }, [FilteredTagEntries]);
 
-  const handleDeleteTag = () => {
-    console.info('You clicked the delete icon.');
-  };
-
-  const handleClickTag = () => {
-    console.info('You clicked the Chip.');
-  };
-
   // This is going to be the delete entry function that is used below.
   const deleteEntry = () => {
     DeleteEntryById(entryId).then(() => {
@@ -115,9 +107,6 @@ export const EntryDetails = () => {
                         key={entry.id}
                         size="small"
                         label={entry.tag.name}
-                        // TODO You don't need these I don't think so you need to get rid of them
-                        onClick={handleClickTag}
-                        onDelete={handleDeleteTag}
                       />
                     );
                   })}
@@ -135,6 +124,9 @@ export const EntryDetails = () => {
                       fullWidth
                       variant="contained"
                       color="primary"
+                      onClick={() => {
+                        history.push(`/details/edit/${entryId}`);
+                      }}
                     >
                       {/* TODO You need to finsh the route to the create form and refactor it so
                       that you can use the form as an edit form as well. */}
