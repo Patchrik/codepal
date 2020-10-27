@@ -13,7 +13,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { TagSelector, TagSelectorHoldingArray } from './TagSelector';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CreateEntry = (props) => {
-  const { addEntry } = useContext(EntryContext);
+  const { addEntry, getEntryById, UpdateEntry } = useContext(EntryContext);
 
   const { getEntryTagsByEntryId, addSelectedEntryTags } = useContext(
     EntryTagContext
@@ -48,9 +48,9 @@ export const CreateEntry = (props) => {
     TagsContext
   );
 
-  const [entry, setEntry] = useState({});
+  const { entryId } = useParams();
 
-  const [entryTags, setEntryTags] = useState({});
+  const [entry, setEntry] = useState({});
 
   const [richText, setRichText] = useState({});
 
@@ -61,9 +61,17 @@ export const CreateEntry = (props) => {
 
   // This will be our first useEffect for the page to grab the first list of tags.
   useEffect(() => {
-    getTags().then((res) => {
-      setLocalTagSelectorHoldingArray([...res]);
-    });
+    getTags()
+      .then((res) => {
+        setLocalTagSelectorHoldingArray([...res]);
+      })
+      .then(() => {
+        if (entryId) {
+          getEntryById(entryId).then((entry) => {
+            setEntry(entry);
+          });
+        }
+      });
   }, []);
 
   const history = useHistory();
@@ -104,24 +112,36 @@ export const CreateEntry = (props) => {
 
   const constructEntryObject = () => {
     const createdDate = new Intl.DateTimeFormat('en-US').format(new Date());
-    addEntry({
-      userId: parseInt(sessionStorage.getItem('activeUserId')),
-      title: entry.entryTitle,
-      entryText: richText,
-      date: createdDate,
-    })
-      .then((addedEntry) => {
-        const selectedTags = LocalTagSelectorHoldingArray.filter(
-          (tag) => tag.isSelected
-        );
-        const entryTags = selectedTags.map((tag) => {
-          return { entryId: addedEntry.id, tagId: tag.id };
-        });
-        return addSelectedEntryTags(entryTags);
-      })
-      .then(() => {
+    if (entryId) {
+      UpdateEntry({
+        id: entryId,
+        userId: parseInt(sessionStorage.getItem('activeUserId')),
+        title: entry.entryTitle,
+        entryText: richText,
+        date: createdDate,
+      }).then(() => {
         history.push('/home');
       });
+    } else {
+      addEntry({
+        userId: parseInt(sessionStorage.getItem('activeUserId')),
+        title: entry.entryTitle,
+        entryText: richText,
+        date: createdDate,
+      })
+        .then((addedEntry) => {
+          const selectedTags = LocalTagSelectorHoldingArray.filter(
+            (tag) => tag.isSelected
+          );
+          const entryTags = selectedTags.map((tag) => {
+            return { entryId: addedEntry.id, tagId: tag.id };
+          });
+          return addSelectedEntryTags(entryTags);
+        })
+        .then(() => {
+          history.push('/home');
+        });
+    }
   };
 
   return (
@@ -161,16 +181,16 @@ export const CreateEntry = (props) => {
                       <TextField
                         name="entryTitle"
                         id="standard-basic"
-                        label="Entry Title"
+                        label={entryId ? `${entry.title}` : 'Entry Title'}
                         onChange={handleControlledInputChange}
-                        defaultValue={entry.entryTitle}
+                        defaultValue={entry.title}
                       />
                     </form>
                   </Grid>
                   <CKEditor
                     className="textField"
                     editor={ClassicEditor}
-                    data="This is the body text"
+                    data={entry.entryText}
                     onInit={(editor) => {
                       // You can store the "editor" and use when it is needed.
                     }}
