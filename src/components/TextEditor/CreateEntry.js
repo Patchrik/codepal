@@ -210,22 +210,6 @@ export const CreateEntry = (props) => {
                       />
                     );
                   })}
-                  {/* {tags.map((tagObj) => {
-                    return (
-                      <Chip
-                        key={tagObj.id}
-                        size="small"
-                        label={tagObj.name}
-                        color={tagObj.isSelected ? 'primary' : 'default'}
-                        onClick={() => {
-                          handleClickTag(tagObj);
-                        }}
-                        onDelete={() => {
-                          handleDeleteTag(tagObj);
-                        }}
-                      />
-                    );
-                  })} */}
                 </div>
                 <Grid
                   item
