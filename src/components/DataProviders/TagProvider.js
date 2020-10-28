@@ -27,7 +27,7 @@ export const TagProvider = (props) => {
       },
       body: JSON.stringify(tagsObj),
       // Probably don't need the getTags call on the end of this.
-    }).then(getTags);
+    }).then((res) => res.json());
   };
 
   const DeleteTagsById = (tagsId) => {
