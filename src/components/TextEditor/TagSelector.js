@@ -16,9 +16,6 @@ export const TagSelector = ({ tag, handleClickTag, handleDeleteTag }) => {
           handleClickTag(tag);
         }
       }}
-      onDelete={() => {
-        DeleteTagsById(tag.id);
-      }}
     />
   );
 };

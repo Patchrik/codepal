@@ -11,6 +11,7 @@ import { TagsContext } from '../DataProviders/TagProvider';
 import { TagSelector } from './TagSelector';
 import { useHistory, useParams } from 'react-router-dom';
 import { AddNewTagComp } from './CreateNewTag';
+import './CKeditor.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -170,104 +171,102 @@ export const CreateEntry = (props) => {
             justify="center"
             style={{ margin: '1em' }}
           >
-            <Paper style={{ height: '100%', width: '100%', margin: '1em' }}>
+            <Grid
+              container
+              item={12}
+              alignItems="center"
+              justify="center"
+              direction="column"
+            >
               <Grid
+                className="EntryDetails"
                 container
-                item={12}
                 alignItems="center"
                 justify="center"
                 direction="column"
+                style={{ margin: '1em' }}
               >
                 <Grid
-                  className="EntryDetails"
                   container
-                  alignItems="center"
-                  justify="center"
-                  direction="column"
+                  justify="space-evenly"
                   style={{ margin: '1em' }}
                 >
-                  <Grid
-                    container
-                    justify="space-evenly"
-                    style={{ margin: '1em' }}
-                  >
-                    <Grid item>
-                      <form
-                        className={classes.textRoot}
-                        noValidate
-                        autoComplete="off"
-                      >
-                        <TextField
-                          name="entryTitle"
-                          id="standard-basic"
-                          label={entryId ? `${entry.title}` : 'Entry Title'}
-                          onChange={handleControlledInputChange}
-                          defaultValue={entry.title}
-                        />
-                      </form>
-                    </Grid>
-                  </Grid>
                   <Grid item>
-                    <CKEditor
-                      className="textField"
-                      editor={ClassicEditor}
-                      data={entry.entryText}
-                      onInit={(editor) => {
-                        // You can store the "editor" and use when it is needed.
-                      }}
-                      onChange={(event, editor) => {
-                        setRichText(editor.getData());
-                      }}
-                    />
+                    <form
+                      className={classes.textRoot}
+                      noValidate
+                      autoComplete="off"
+                    >
+                      <TextField
+                        name="entryTitle"
+                        id="standard-basic"
+                        label={entryId ? `${entry.title}` : 'Entry Title'}
+                        onChange={handleControlledInputChange}
+                        defaultValue={entry.title}
+                      />
+                    </form>
                   </Grid>
                 </Grid>
-                <div className={classes.root}>
-                  {LocalTagSelectorHoldingArray.map((tagObj) => {
-                    return (
-                      <TagSelector
-                        key={tagObj.id}
-                        tag={tagObj}
-                        handleClickTag={handleClickTag}
-                        handleDeleteTag={handleDeleteTag}
-                      />
-                    );
-                  })}
-                </div>
-                <AddNewTagComp />
-                <Grid
-                  item
-                  container
-                  spacing={2}
-                  justify="space-around"
-                  style={{ margin: '1em' }}
-                >
-                  <Grid item>
-                    <Button
-                      type="button"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        constructEntryObject();
-                      }}
-                    >
-                      Save
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      type="button"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                    >
-                      Cancel
-                    </Button>
-                  </Grid>
+                <Grid item>
+                  <CKEditor
+                    className="textField"
+                    editor={ClassicEditor}
+                    data={entry.entryText}
+                    onInit={(editor) => {
+                      // You can store the "editor" and use when it is needed.
+                    }}
+                    onChange={(event, editor) => {
+                      setRichText(editor.getData());
+                    }}
+                  />
                 </Grid>
               </Grid>
-            </Paper>
+              <div className={classes.root}>
+                {LocalTagSelectorHoldingArray.map((tagObj) => {
+                  return (
+                    <TagSelector
+                      key={tagObj.id}
+                      tag={tagObj}
+                      handleClickTag={handleClickTag}
+                      handleDeleteTag={handleDeleteTag}
+                    />
+                  );
+                })}
+              </div>
+              <AddNewTagComp />
+              <Grid
+                item
+                container
+                spacing={2}
+                justify="space-around"
+                style={{ margin: '1em' }}
+              >
+                <Grid item>
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      constructEntryObject();
+                    }}
+                  >
+                    Save
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={false} sm={2} />
