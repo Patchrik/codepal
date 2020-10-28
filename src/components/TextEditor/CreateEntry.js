@@ -1,19 +1,16 @@
-import React, { Component, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Button, Grid, Paper, Typography } from '@material-ui/core';
+import { Button, Grid, Paper } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import CodepalAppBar from '../EntryList/Header';
 import { EntryContext } from '../DataProviders/EntryProvider';
 import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
 import { EntryTagContext } from '../DataProviders/EntryTagProvider';
 import { TagsContext } from '../DataProviders/TagProvider';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import { TagSelector, TagSelectorHoldingArray } from './TagSelector';
+import { TagSelector } from './TagSelector';
 import { useHistory, useParams } from 'react-router-dom';
+import { AddNewTagComp } from './CreateNewTag';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: '25ch',
     },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: 200,
-    },
+    // textField: {
+    //   marginLeft: theme.spacing(1),
+    //   marginRight: theme.spacing(1),
+    //   width: '100%',
+    // },
   },
 }));
 
@@ -159,7 +156,13 @@ export const CreateEntry = (props) => {
             style={{ margin: '1em' }}
           >
             <Paper style={{ height: '100%', width: '100%', margin: '1em' }}>
-              <Grid container item={12} alignItems="center" justify="center">
+              <Grid
+                container
+                item={12}
+                alignItems="center"
+                justify="center"
+                direction="column"
+              >
                 <Grid
                   className="EntryDetails"
                   container
@@ -173,31 +176,35 @@ export const CreateEntry = (props) => {
                     justify="space-evenly"
                     style={{ margin: '1em' }}
                   >
-                    <form
-                      className={classes.textRoot}
-                      noValidate
-                      autoComplete="off"
-                    >
-                      <TextField
-                        name="entryTitle"
-                        id="standard-basic"
-                        label={entryId ? `${entry.title}` : 'Entry Title'}
-                        onChange={handleControlledInputChange}
-                        defaultValue={entry.title}
-                      />
-                    </form>
+                    <Grid item>
+                      <form
+                        className={classes.textRoot}
+                        noValidate
+                        autoComplete="off"
+                      >
+                        <TextField
+                          name="entryTitle"
+                          id="standard-basic"
+                          label={entryId ? `${entry.title}` : 'Entry Title'}
+                          onChange={handleControlledInputChange}
+                          defaultValue={entry.title}
+                        />
+                      </form>
+                    </Grid>
                   </Grid>
-                  <CKEditor
-                    className="textField"
-                    editor={ClassicEditor}
-                    data={entry.entryText}
-                    onInit={(editor) => {
-                      // You can store the "editor" and use when it is needed.
-                    }}
-                    onChange={(event, editor) => {
-                      setRichText(editor.getData());
-                    }}
-                  />
+                  <Grid item>
+                    <CKEditor
+                      className="textField"
+                      editor={ClassicEditor}
+                      data={entry.entryText}
+                      onInit={(editor) => {
+                        // You can store the "editor" and use when it is needed.
+                      }}
+                      onChange={(event, editor) => {
+                        setRichText(editor.getData());
+                      }}
+                    />
+                  </Grid>
                 </Grid>
                 <div className={classes.root}>
                   {LocalTagSelectorHoldingArray.map((tagObj) => {
@@ -211,6 +218,7 @@ export const CreateEntry = (props) => {
                     );
                   })}
                 </div>
+                <AddNewTagComp />
                 <Grid
                   item
                   container
