@@ -1,7 +1,9 @@
 import Chip from '@material-ui/core/Chip';
-import React from 'react';
+import React, { useContext } from 'react';
+import { TagsContext } from '../DataProviders/TagProvider';
 
 export const TagSelector = ({ tag, handleClickTag, handleDeleteTag }) => {
+  const { DeleteTagsById } = useContext(TagsContext);
   return (
     <Chip
       size="small"
@@ -13,6 +15,9 @@ export const TagSelector = ({ tag, handleClickTag, handleDeleteTag }) => {
         } else {
           handleClickTag(tag);
         }
+      }}
+      onDelete={() => {
+        DeleteTagsById(tag.id);
       }}
     />
   );

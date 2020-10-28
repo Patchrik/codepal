@@ -76,9 +76,8 @@
     {
       "id": 12,
       "userId": 2,
-      "title": "This Title still has to be updated",
       "entryText": "<p>This should be a fine example of a text entry. And there is a slight problem, this text field will keep expanding which isn't good fam.</p>",
-      "date": "10/27/2020"
+      "date": "10/28/2020"
     }
   ],
   "tags": [
@@ -99,16 +98,12 @@
       "id": 4
     },
     {
-      "name": "",
+      "name": "Material Ui Chips",
       "id": 5
     },
     {
-      "name": "This should work.",
+      "name": "useEffect",
       "id": 6
-    },
-    {
-      "name": "Let's see what happened now",
-      "id": 7
     }
   ],
   "entryTags": [

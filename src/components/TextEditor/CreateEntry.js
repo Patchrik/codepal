@@ -58,18 +58,33 @@ export const CreateEntry = (props) => {
 
   // This will be our first useEffect for the page to grab the first list of tags.
   useEffect(() => {
-    getTags()
-      .then((res) => {
-        setLocalTagSelectorHoldingArray([...res]);
-      })
-      .then(() => {
-        if (entryId) {
-          getEntryById(entryId).then((entry) => {
-            setEntry(entry);
-          });
-        }
-      });
+    getTags().then(() => {
+      if (entryId) {
+        getEntryById(entryId).then((entry) => {
+          setEntry(entry);
+        });
+      }
+    });
   }, []);
+
+  useEffect(() => {
+    if (LocalTagSelectorHoldingArray.length <= 0) {
+      setLocalTagSelectorHoldingArray([...tags]);
+      return;
+    }
+    const newlyAddedTags = tags
+      .filter((tag) => {
+        return !LocalTagSelectorHoldingArray.find((t) => {
+          return tag.id === t.id;
+        });
+      })
+      .map((tag) => {
+        tag.isSelected = true;
+        return tag;
+      });
+    const updatedTags = [...LocalTagSelectorHoldingArray, ...newlyAddedTags];
+    setLocalTagSelectorHoldingArray(updatedTags);
+  }, [tags]);
 
   const history = useHistory();
 
