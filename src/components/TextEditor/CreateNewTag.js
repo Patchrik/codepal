@@ -25,6 +25,7 @@ export const AddNewTagComp = () => {
       .then((res) => {
         console.log('This should be a tag object', res);
         sessionStorage.setItem('newTagId', res.id);
+        getTags();
       })
       .then(setTag(''));
   };
