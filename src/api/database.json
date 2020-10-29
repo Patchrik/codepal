@@ -15,6 +15,14 @@
       "email": "pklly92@gmail.com",
       "password": "test123",
       "id": 2
+    },
+    {
+      "firstName": "Bill ",
+      "lastName": "Builder",
+      "userName": "Builder",
+      "email": "IcanBuildit@bill.com",
+      "password": "Bill",
+      "id": 3
     }
   ],
   "entries": [
@@ -78,6 +86,20 @@
       "userId": 2,
       "entryText": "<p>This should be a fine example of a text entry. And there is a slight problem, this text field will keep expanding which isn't good fam.</p>",
       "date": "10/28/2020"
+    },
+    {
+      "userId": 3,
+      "title": "Starting my new Codepal",
+      "entryText": "<p>Looks like we got this new site that I can use to track how I'm learning. Well today I'm learning about</p><p>how to use CKeditor 5, which is a rich text editor. It allows you to type in this box and it will create</p><p>html for you, so that you can <strong>BOLD</strong> and <i>Italicize</i> your notes.&nbsp;</p><p>Right now I need to learn how to edit the styling of the editor because if you're not careful it will grow</p><p>out of control. Which we don't want to happen. But I guess I'll go looking on the internet for the answer</p><p>and I bet I'll find them.</p>",
+      "date": "10/29/2020",
+      "id": 13
+    },
+    {
+      "id": 14,
+      "userId": 1,
+      "title": "Using CSS on CKeditor",
+      "entryText": "<p>Let's see if this works you have to keep testing because sometimes you don't notice the bugs when you're just writing stuff by yourself. But now that you're having to work on stuff like this it's important to keep testing things. So this issue is that when we style this it's losing the wrap property that it has by default and that's what we need in the details page to make sure that it does look weird. The problem is that as a user it's weird to see your text editor expand. So we need to see how to have content wrap and still make the editor the right size.</p>",
+      "date": "10/29/2020"
     }
   ],
   "tags": [
@@ -104,26 +126,15 @@
     {
       "name": "useEffect",
       "id": 6
+    },
+    {
+      "name": "CSS",
+      "id": 7
     }
   ],
   "entryTags": [
     {
       "id": 1,
-      "entryId": 1,
-      "tagId": 1
-    },
-    {
-      "id": 2,
-      "entryId": 1,
-      "tagId": 1
-    },
-    {
-      "id": 3,
-      "entryId": 1,
-      "tagId": 1
-    },
-    {
-      "id": 4,
       "entryId": 1,
       "tagId": 1
     },
@@ -136,6 +147,16 @@
       "entryId": 12,
       "tagId": 2,
       "id": 6
+    },
+    {
+      "entryId": 13,
+      "tagId": 4,
+      "id": 7
+    },
+    {
+      "entryId": 14,
+      "tagId": 7,
+      "id": 8
     }
   ],
   "tests": [

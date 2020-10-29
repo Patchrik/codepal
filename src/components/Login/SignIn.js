@@ -133,7 +133,13 @@ export const SignIn = () => {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Link to="/createAccount" variant="body2">
+              <Link
+                component="button"
+                variant="body2"
+                onClick={() => {
+                  history.push('/createAccount');
+                }}
+              >
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
