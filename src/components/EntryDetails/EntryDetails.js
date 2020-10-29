@@ -40,6 +40,12 @@ export const EntryDetails = () => {
     getEntryById(entryId)
       .then((response) => {
         setEntry(response);
+        debugger;
+        if (
+          parseInt(sessionStorage.getItem('activeUserId')) !== response.userId
+        ) {
+          history.push('/home');
+        }
       })
       .then((_) => {
         getEntryTagsByEntryId(entryId);

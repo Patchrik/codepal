@@ -48,7 +48,7 @@ export const CreateEntry = (props) => {
 
   const { entryId } = useParams();
 
-  const [entry, setEntry] = useState({});
+  const [entry, setEntry] = useState({ title: '', entryText: '', date: '' });
 
   const [richText, setRichText] = useState({});
 
@@ -62,6 +62,11 @@ export const CreateEntry = (props) => {
     getTags().then(() => {
       if (entryId) {
         getEntryById(entryId).then((entry) => {
+          if (
+            parseInt(sessionStorage.getItem('activeUserId')) !== entry.userId
+          ) {
+            history.push('/home');
+          }
           setEntry(entry);
         });
       }
@@ -129,7 +134,7 @@ export const CreateEntry = (props) => {
       UpdateEntry({
         id: entryId,
         userId: parseInt(sessionStorage.getItem('activeUserId')),
-        title: entry.entryTitle,
+        title: entry.title,
         entryText: richText,
         date: createdDate,
       }).then(() => {
@@ -138,7 +143,7 @@ export const CreateEntry = (props) => {
     } else {
       addEntry({
         userId: parseInt(sessionStorage.getItem('activeUserId')),
-        title: entry.entryTitle,
+        title: entry.title,
         entryText: richText,
         date: createdDate,
       })
@@ -198,11 +203,11 @@ export const CreateEntry = (props) => {
                       autoComplete="off"
                     >
                       <TextField
-                        name="entryTitle"
+                        name="title"
                         id="standard-basic"
-                        label={entryId ? `${entry.title}` : 'Entry Title'}
+                        label={'Entry Title'}
                         onChange={handleControlledInputChange}
-                        defaultValue={entry.title}
+                        value={entry.title}
                       />
                     </form>
                   </Grid>
