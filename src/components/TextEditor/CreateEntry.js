@@ -11,7 +11,6 @@ import { TagsContext } from '../DataProviders/TagProvider';
 import { TagSelector } from './TagSelector';
 import { useHistory, useParams } from 'react-router-dom';
 import { AddNewTagComp } from './CreateNewTag';
-import './CKeditor.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -216,6 +215,21 @@ export const CreateEntry = (props) => {
                   <CKEditor
                     className="textField"
                     editor={ClassicEditor}
+                    config={{
+                      toolbar: [
+                        'heading',
+                        '|',
+                        'bold',
+                        'italic',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        'blockQuote',
+                        'undo',
+                        '|',
+                        'redo',
+                      ],
+                    }}
                     data={entry.entryText}
                     onInit={(editor) => {
                       // You can store the "editor" and use when it is needed.

@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import './EntryCard.css';
 
 const useStyles = makeStyles({
   root: {
@@ -28,9 +27,7 @@ export const EntryCard = ({ entry }) => {
             {entry.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {/* {entry.entryText} */}
             <CKEditor
-              className="textReader"
               disabled={true}
               editor={ClassicEditor}
               data={entry.entryText}
