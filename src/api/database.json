@@ -15,6 +15,22 @@
       "email": "pklly92@gmail.com",
       "password": "test123",
       "id": 2
+    },
+    {
+      "firstName": "Bill ",
+      "lastName": "Builder",
+      "userName": "Builder",
+      "email": "IcanBuildit@bill.com",
+      "password": "Bill",
+      "id": 3
+    },
+    {
+      "firstName": "Frank",
+      "lastName": "Reynolds",
+      "userName": "Frank",
+      "email": "Frank@pub.com",
+      "password": "Frank",
+      "id": 4
     }
   ],
   "entries": [
@@ -34,10 +50,10 @@
     },
     {
       "id": 3,
-      "userId": 1,
-      "title": "Testing In React",
-      "entryText": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a",
-      "date": "12-6-1774"
+      "userId": 4,
+      "title": "It's working now.",
+      "entryText": "<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a it's still working. YOU BEEN HACKED<br>Hackerman</p>",
+      "date": "10/29/2020"
     },
     {
       "id": 4,
@@ -78,6 +94,27 @@
       "userId": 2,
       "entryText": "<p>This should be a fine example of a text entry. And there is a slight problem, this text field will keep expanding which isn't good fam.</p>",
       "date": "10/28/2020"
+    },
+    {
+      "userId": 3,
+      "title": "Starting my new Codepal",
+      "entryText": "<p>Looks like we got this new site that I can use to track how I'm learning. Well today I'm learning about</p><p>how to use CKeditor 5, which is a rich text editor. It allows you to type in this box and it will create</p><p>html for you, so that you can <strong>BOLD</strong> and <i>Italicize</i> your notes.&nbsp;</p><p>Right now I need to learn how to edit the styling of the editor because if you're not careful it will grow</p><p>out of control. Which we don't want to happen. But I guess I'll go looking on the internet for the answer</p><p>and I bet I'll find them.</p>",
+      "date": "10/29/2020",
+      "id": 13
+    },
+    {
+      "id": 14,
+      "userId": 1,
+      "title": "Using CSS on CKeditor",
+      "entryText": "<p>Let's see if this works you have to keep testing because sometimes you don't notice the bugs when you're just writing stuff by yourself. But now that you're having to work on stuff like this it's important to keep testing things. So this issue is that when we style this it's losing the wrap property that it has by default and that's what we need in the details page to make sure that it does look weird. The problem is that as a user it's weird to see your text editor expand. So we need to see how to have content wrap and still make the editor the right size.</p>",
+      "date": "10/29/2020"
+    },
+    {
+      "id": 15,
+      "userId": 2,
+      "title": "Size test",
+      "entryText": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec tincidunt purus, vel pellentesque massa. Vivamus nec neque scelerisque nulla sagittis varius. Maecenas eget elementum nunc. Suspendisse consequat, tellus sed mollis ultricies, ante mauris hendrerit nisi, in congue sem risus at libero. Ut urna sapien, pellentesque eget luctus vitae, aliquam ut odio. In dictum id tortor quis vestibulum. Cras sagittis ultrices diam et vulputate. Aliquam ut dolor vel orci rutrum suscipit eu at neque. Etiam sed ante tristique, elementum lacus ac, feugiat libero. Morbi id aliquam elit. Etiam semper sagittis eros vel bibendum. Mauris ornare viverra quam id semper. Duis viverra iaculis massa eget molestie.</p><p>Phasellus et nunc dui. Etiam eu nisi ex. Phasellus lorem lorem, pretium ut imperdiet vitae, laoreet id purus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus et ipsum erat. Nulla vitae mi erat. Aenean fermentum mollis hendrerit. Vestibulum eleifend, velit non aliquam ornare, eros urna volutpat augue, ut elementum turpis turpis ultrices orci. Nullam in erat vitae eros euismod condimentum. Pellentesque sit amet sem in tortor viverra molestie. Nam id mattis urna, eu bibendum elit.</p><p>Donec at magna rutrum diam dignissim hendrerit. Integer tincidunt lacus quis luctus mollis. In viverra ante tincidunt lobortis elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus fringilla a risus posuere faucibus. Fusce posuere velit urna, a ultrices metus tincidunt ac. Sed facilisis, dui nec elementum consequat, orci felis maximus diam, in venenatis ipsum odio at ex. Quisque feugiat sapien eu ligula pellentesque bibendum. Maecenas dapibus nunc ut accumsan ultrices. Praesent sit amet quam a ligula pharetra lacinia eu non urna. Donec sit amet tortor libero. Pellentesque tempus malesuada sapien imperdiet pellentesque. Phasellus felis lectus, sodales convallis gravida vel, sodales at nibh.</p><p>Let's see what happens when I keep adding new stuff and let's see if it will become hidden at a certain point because I think that is what is going to happen based on what has been happening lately which is very annoying because It should only be pulling from the one style sheet that is in each folder. But for some reason it's overwriting the styles everywhere which is not what I want to have happen at all. But I can find out what's happening no doubt, because their is a large amount of info on the CKeditior online which is nice the bigger problem is how do we edit things that don't have defined classes and that will be the problem that we have to solve. Yay.</p>",
+      "date": "10/29/2020"
     }
   ],
   "tags": [
@@ -104,26 +141,15 @@
     {
       "name": "useEffect",
       "id": 6
+    },
+    {
+      "name": "CSS",
+      "id": 7
     }
   ],
   "entryTags": [
     {
       "id": 1,
-      "entryId": 1,
-      "tagId": 1
-    },
-    {
-      "id": 2,
-      "entryId": 1,
-      "tagId": 1
-    },
-    {
-      "id": 3,
-      "entryId": 1,
-      "tagId": 1
-    },
-    {
-      "id": 4,
       "entryId": 1,
       "tagId": 1
     },
@@ -136,6 +162,21 @@
       "entryId": 12,
       "tagId": 2,
       "id": 6
+    },
+    {
+      "entryId": 13,
+      "tagId": 4,
+      "id": 7
+    },
+    {
+      "entryId": 14,
+      "tagId": 7,
+      "id": 8
+    },
+    {
+      "entryId": 15,
+      "tagId": 4,
+      "id": 9
     }
   ],
   "tests": [

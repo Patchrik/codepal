@@ -27,9 +27,7 @@ export const EntryCard = ({ entry }) => {
             {entry.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {/* {entry.entryText} */}
             <CKEditor
-              className="textField"
               disabled={true}
               editor={ClassicEditor}
               data={entry.entryText}

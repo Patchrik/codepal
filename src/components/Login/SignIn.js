@@ -73,7 +73,6 @@ export const SignIn = () => {
           sessionStorage.setItem('activeUserName', exists.userName);
           // This history will push you to the landing page where we'll have multiple entries.
           history.push('/home');
-          console.log("congrats motherfucker you're in");
         } else {
           alert(
             `Sorry that's not the password for ${exists.userName}! Make sure that your Caps Lock is off and try again.`
@@ -133,7 +132,13 @@ export const SignIn = () => {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Link to="/createAccount" variant="body2">
+              <Link
+                component="button"
+                variant="body2"
+                onClick={() => {
+                  history.push('/createAccount');
+                }}
+              >
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
