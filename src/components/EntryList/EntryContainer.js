@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { Container, CssBaseline, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import CodepalAppBar from './Header';
+import { CreationCard } from './CreationCard';
 
 export const EntryList = () => {
   const activeUser = {
@@ -54,6 +55,9 @@ export const EntryList = () => {
                 </Grid>
               );
             })}
+            <Grid item xs={4}>
+              <CreationCard />
+            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={false} sm={2} />
