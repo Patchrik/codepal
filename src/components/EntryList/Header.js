@@ -53,15 +53,6 @@ export default function CodepalAppBar() {
           <Typography className={classes.userName} variant="subtitle1">
             Hello {sessionStorage.getItem('activeUserName')}
           </Typography>
-          {/* TODO You need to add a button to create an entry right here. */}
-          <Button
-            color="inherit"
-            onClick={() => {
-              history.push('/create');
-            }}
-          >
-            Create
-          </Button>
 
           <Button
             color="inherit"

@@ -31,6 +31,14 @@
       "email": "Frank@pub.com",
       "password": "Frank",
       "id": 4
+    },
+    {
+      "firstName": "Newb",
+      "lastName": "Newberrow",
+      "userName": "Newblet",
+      "email": "Newtothis@gmail.com",
+      "password": "newbee",
+      "id": 5
     }
   ],
   "entries": [
