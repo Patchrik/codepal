@@ -39,6 +39,14 @@
       "email": "Newtothis@gmail.com",
       "password": "newbee",
       "id": 5
+    },
+    {
+      "firstName": "Student",
+      "lastName": "Newby",
+      "userName": "Newby",
+      "email": "Newby@Student.com",
+      "password": "Learning",
+      "id": 6
     }
   ],
   "entries": [
@@ -123,6 +131,13 @@
       "title": "Size test",
       "entryText": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec tincidunt purus, vel pellentesque massa. Vivamus nec neque scelerisque nulla sagittis varius. Maecenas eget elementum nunc. Suspendisse consequat, tellus sed mollis ultricies, ante mauris hendrerit nisi, in congue sem risus at libero. Ut urna sapien, pellentesque eget luctus vitae, aliquam ut odio. In dictum id tortor quis vestibulum. Cras sagittis ultrices diam et vulputate. Aliquam ut dolor vel orci rutrum suscipit eu at neque. Etiam sed ante tristique, elementum lacus ac, feugiat libero. Morbi id aliquam elit. Etiam semper sagittis eros vel bibendum. Mauris ornare viverra quam id semper. Duis viverra iaculis massa eget molestie.</p><p>Phasellus et nunc dui. Etiam eu nisi ex. Phasellus lorem lorem, pretium ut imperdiet vitae, laoreet id purus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus et ipsum erat. Nulla vitae mi erat. Aenean fermentum mollis hendrerit. Vestibulum eleifend, velit non aliquam ornare, eros urna volutpat augue, ut elementum turpis turpis ultrices orci. Nullam in erat vitae eros euismod condimentum. Pellentesque sit amet sem in tortor viverra molestie. Nam id mattis urna, eu bibendum elit.</p><p>Donec at magna rutrum diam dignissim hendrerit. Integer tincidunt lacus quis luctus mollis. In viverra ante tincidunt lobortis elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus fringilla a risus posuere faucibus. Fusce posuere velit urna, a ultrices metus tincidunt ac. Sed facilisis, dui nec elementum consequat, orci felis maximus diam, in venenatis ipsum odio at ex. Quisque feugiat sapien eu ligula pellentesque bibendum. Maecenas dapibus nunc ut accumsan ultrices. Praesent sit amet quam a ligula pharetra lacinia eu non urna. Donec sit amet tortor libero. Pellentesque tempus malesuada sapien imperdiet pellentesque. Phasellus felis lectus, sodales convallis gravida vel, sodales at nibh.</p><p>Let's see what happens when I keep adding new stuff and let's see if it will become hidden at a certain point because I think that is what is going to happen based on what has been happening lately which is very annoying because It should only be pulling from the one style sheet that is in each folder. But for some reason it's overwriting the styles everywhere which is not what I want to have happen at all. But I can find out what's happening no doubt, because their is a large amount of info on the CKeditior online which is nice the bigger problem is how do we edit things that don't have defined classes and that will be the problem that we have to solve. Yay.</p>",
       "date": "10/29/2020"
+    },
+    {
+      "userId": 6,
+      "title": "Just getting started!",
+      "entryText": "<p>Looking forward to getting started! I've been wanting to learn how to program for a very long time. But today is the day to start. First we're just going to focus on learning basic HTML and CSS. But so far we've worked on how to structure an HTML page. So that it's easier to understand and read when updating the web page. We do this through using <a href=\"https://www.d.umn.edu/~hrallis/guides/htmlguide/tags.html#:~:text=Every%20web%20page%20begins%20and,placed%20at%20the%20very%20end.\">HTML Tags</a>. Which can be tags like Head, Body, which hold a lot of information or smaller tags, like Div tags, which can help us divide a website even more.&nbsp;</p><p>We also learned about <a href=\"https://www.w3schools.com/\">w3schools</a> and <a href=\"https://developer.mozilla.org/en-US/\">MDNdeveloper.mozilla.org</a> which are great resources to help learn what certain tags are for.</p>",
+      "date": "11/9/2020",
+      "id": 16
     }
   ],
   "tags": [
@@ -153,6 +168,14 @@
     {
       "name": "CSS",
       "id": 7
+    },
+    {
+      "name": "w3schools",
+      "id": 8
+    },
+    {
+      "name": "developer mozilla",
+      "id": 9
     }
   ],
   "entryTags": [
@@ -185,6 +208,16 @@
       "entryId": 15,
       "tagId": 4,
       "id": 9
+    },
+    {
+      "entryId": 16,
+      "tagId": 8,
+      "id": 10
+    },
+    {
+      "entryId": 16,
+      "tagId": 9,
+      "id": 11
     }
   ],
   "tests": [
