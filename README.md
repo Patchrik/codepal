@@ -36,7 +36,7 @@ NPM installed on your machine - [NPM Install Instructions](https://www.npmjs.com
 Once you have NPM installed you'll need to get JSON-server. [Get JSON server here](https://www.npmjs.com/package/json-server)
 Alright we should be ready to go! Clone down the Main branch to your local machine.
 
-Describe how to install / setup your local environement / add link to demo version.
+I'm still updating this.
 
 ## Features
 * Users can create an unique account which is saved to JSON-server.
